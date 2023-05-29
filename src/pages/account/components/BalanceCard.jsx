@@ -2,7 +2,7 @@ import React from "react";
 import svg1 from "../../../assets/Ellipse 184.svg";
 import svg2 from "../../../assets/Rectangle 4055.svg";
 import svg3 from "../../../assets/Rectangle 4056.svg";
-import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { SiAddthis } from "react-icons/si";
 
 const BalanceCard = ({ amount }) => {
   return (
@@ -16,7 +16,7 @@ const BalanceCard = ({ amount }) => {
           <p className="text-3xl mt-2 text-text font-medium">${amount}</p>
           <p className="mt-2 text-sm text-text">(N750/$)</p>
           <div className=" flex items-center gap-3 self-end justify-self-end mt-10 text-text text-lg font-medium">
-            My Wallet <BsFillArrowRightCircleFill />
+            Deposit <SiAddthis />
           </div>
         </div>
       </div>

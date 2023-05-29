@@ -10,9 +10,9 @@ const Head = ({ name }) => {
         </span>
         <p className="text-lg font-medium">Hi {name} 👋🏿</p>
       </div>
-      <div className="text-lg font-medium flex items-center justify-center gap-2">
-        Add Money <SiAddthis />
-      </div>
+      <SiAddthis />
+      {/* <div className="text-lg font-medium flex items-center justify-center gap-2">
+      </div> */}
     </div>
   );
 };
