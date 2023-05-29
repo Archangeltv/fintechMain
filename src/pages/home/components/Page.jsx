@@ -2,22 +2,23 @@ import React, { useEffect, useRef } from "react";
 import main from "../../../assets/Main.png";
 import Container from "../../../components/ui/Container";
 import { TweenMax, Power3 } from "gsap";
+import { Link } from "react-router-dom";
 
 const Page = () => {
   let item = useRef(null);
 
-  useEffect(() => {
-    TweenMax.to(item, 0.3, {
-      css: {
-        translateY: 0,
-      },
-      ease: Power3.easeOut,
-    });
-  }, []);
+  // useEffect(() => {
+  //   TweenMax.to(item, 0.3, {
+  //     css: {
+  //       translateY: 0,
+  //     },
+  //     ease: Power3.easeOut,
+  //   });
+  // }, []);
 
   return (
     <Container className="">
-      <main ref={(el) => (item = el)} className=" translate-y-3/4 padding">
+      <main ref={(el) => (item = el)} className="padding">
         <div className="flex mt-10 lg:mt-5 items-center justify-center w-full">
           <img
             src={main}
@@ -34,10 +35,15 @@ const Page = () => {
         </p>
         <div className="my-7 flex items-center gap-7 justify-between">
           <button className="w-full bg-brandbg bg-opacity-10 text-center h-12 rounded-lg text-lg shadow font-medium">
-            Login
+            <Link to="login">
+              <span className=" block w-full">Login</span>
+            </Link>
           </button>
           <button className="w-full text-center h-12 bg-brandbg rounded-lg text-text text-lg font-medium">
-            Sign Up
+            <Link to="sign-up">
+              {" "}
+              <span className="block w-full"> Sign Up </span>
+            </Link>
           </button>
         </div>
       </main>

@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [isShow, setIsShow] = useState(false);
@@ -31,7 +30,12 @@ const Login = () => {
     try {
       setNotLoading(false);
       await signIn(email, password);
-      toast.success("Login Successful");
+      Swal.fire({
+        title: "Success",
+        text: "Login Successful, Welcome Back.",
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
 
       const timeout = setTimeout(() => {
         navigate("/account");
@@ -42,15 +46,30 @@ const Login = () => {
       setError(error.message);
       {
         error.message === "Firebase: Error (auth/network-request-failed)." &&
-          toast.error("Network Unavailable");
+          Swal.fire({
+            title: "Oops...",
+            text: "Network Error, Please check your network and try again.",
+            icon: "error",
+            confirmButtonText: "Okay",
+          });
       }
       {
         error.message === "Firebase: Error (auth/user-not-found)." &&
-          toast.error("User not found.");
+          Swal.fire({
+            title: "Oops...",
+            text: "We don't have your records with us, Check Email or Create an account.",
+            icon: "error",
+            confirmButtonText: "Okay",
+          });
       }
       {
         error.message === "Firebase: Error (auth/wrong-password)." &&
-          toast.error("Wrong Password!.");
+          Swal.fire({
+            title: "Oops...",
+            text: "Wrong Password, Check it and try again.",
+            icon: "error",
+            confirmButtonText: "Okay",
+          });
       }
       setNotLoading(true);
     }
@@ -107,7 +126,7 @@ const Login = () => {
               <form onSubmit={handleSubmit}>
                 {/* mail  */}
                 <div>
-                  <div className="text-sm font-bold text-gray-700 tracking-wide">
+                  <div className="text-sm font-bold text-brandbg tracking-wide">
                     Email Address
                   </div>
                   <input
@@ -127,7 +146,7 @@ const Login = () => {
                 {/* password  */}
                 <div className="mt-8">
                   <div className="flex justify-between items-center">
-                    <div className="text-sm font-bold text-gray-700 tracking-wide">
+                    <div className="text-sm font-bold text-brandbg tracking-wide">
                       Password
                     </div>
                     <div>
@@ -177,7 +196,7 @@ const Login = () => {
                       email === "" ||
                       password.trim("").length < 6
                     }
-                    className="bg-myGreen disabled:cursor-not-allowed disabled:bg-opacity-70 text-gray-100 p-4 w-full rounded-full tracking-wide
+                    className="bg-myGreen disabled:cursor-not-allowed disabled:bg-opacity-70 bg-brandbg text-text p-4 w-full rounded-full tracking-wide
                               font-semibold font-display focus:outline-none focus:shadow-outline 
                               shadow-lg"
                   >
@@ -210,9 +229,9 @@ const Login = () => {
                   </button>
                 </div>
               </form>
-              <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
+              <div className="mt-12 text-sm font-display font-semibold text-brandbg text-center">
                 Don't have an account ?{" "}
-                <Link to="/signup">
+                <Link to="/sign-up">
                   <span className="cursor-pointer text-myGreen hover:opacity-70">
                     Sign up
                   </span>
@@ -222,16 +241,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <ToastContainer
-        position="top-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        rtl={false}
-        draggable
-        pauseOnHover
-      />
     </>
   );
 };

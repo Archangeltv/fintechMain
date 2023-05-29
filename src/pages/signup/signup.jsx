@@ -4,6 +4,8 @@ import { UserAuth } from "../../context/AuthContext";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Logo from "../../components/ui/Logo";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { user, signUp } = UserAuth();
@@ -21,25 +23,40 @@ const SignUp = () => {
     try {
       setNotLoading(false);
       await signUp(name, email, password);
-      toast.success("Sign-Up Successful");
+      Swal.fire({
+        title: "Success",
+        text: "Thanks for Registering with Us, We hope you enjoy using our WebApp.",
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
       const timeout = setTimeout(() => {
-        navigate("/account");
+        navigate("/account/setpin");
       }, 3000);
       return () => clearTimeout(timeout);
     } catch (e) {
       setNotLoading(true);
       e.message === "Firebase: Error (auth/email-already-in-use)." &&
-        toast.error("Email already in use!");
+        Swal.fire({
+          title: "Oops...",
+          text: "Email already in use. Please check Email or Login if you already have an Account.",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
       e.message === "Firebase: Error (auth/network-request-failed)." &&
-        toast.error("Network Error");
+        Swal.fire({
+          title: "Oops...",
+          text: "Network Error. Please check your network and try again",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
     }
   };
 
   useEffect(() => {
-    // if (user) {
-    //   navigate("/account");
-    //   console.log(user);
-    // }
+    if (user) {
+      navigate("/account");
+      console.log(user);
+    }
   }, [user, navigate]);
 
   return (
@@ -49,40 +66,12 @@ const SignUp = () => {
         <div className="lg:w-1/2 xl:max-w-screen-sm">
           <Link to="/">
             <div className="py-10 flex justify-center">
-              <div className="cursor-pointer flex items-center">
-                <div>
-                  <svg
-                    className="w-10 text-text"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                    version="1.1"
-                    id="Layer_1"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 225 225"
-                    style={{ enableBackground: "new 0 0 225 225" }}
-                    xmlSpace="preserve"
-                  >
-                    <g transform="matrix( 1, 0, 0, 1, 0,0) ">
-                      <g>
-                        <path
-                          id="Layer0_0_1_STROKES"
-                          className="st0"
-                          d="M173.8,151.5l13.6-13.6 M35.4,89.9l29.1-29 M89.4,34.9v1 M137.4,187.9l-0.6-0.4     M36.6,138.7l0.2-0.2 M56.1,169.1l27.7-27.6 M63.8,111.5l74.3-74.4 M87.1,188.1L187.6,87.6 M110.8,114.5l57.8-57.8"
-                        />
-                      </g>
-                    </g>
-                  </svg>
-                </div>
-                <div className="text-2xl text-text tracking-wide ml-2 font-semibold">
-                  Fintech.
-                </div>
-              </div>
+              <Logo color="text-brandbg" size="w-12" text="text-3xl" />
             </div>
           </Link>
           <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-0 xl:px-24 xl:max-w-2xl">
             <h2
-              className="text-center text-2xl text-text font-display font-semibold lg:text-center xl:text-3xl
+              className="text-center text-2xl text-brandbg font-display font-semibold lg:text-center xl:text-3xl
               xl:text-bold"
             >
               Create a new Account with us.
@@ -94,11 +83,11 @@ const SignUp = () => {
               <form onSubmit={handleSubmit}>
                 {/* name  */}
                 <div>
-                  <div className="text-sm font-bold text-white tracking-wide">
+                  <div className="text-sm font-bold text-brandbg tracking-wide">
                     Your Name
                   </div>
                   <input
-                    className="w-full text-text text-lg py-2 border-b bg-transparent focus:outline-none"
+                    className="w-full text-brandbg text-lg py-2 border-b bg-transparent focus:outline-none"
                     type="text"
                     required
                     placeholder="Your name here"
@@ -109,11 +98,11 @@ const SignUp = () => {
                 {/* email  */}
 
                 <div className="mt-8">
-                  <div className="text-sm font-bold text-text tracking-wide">
+                  <div className="text-sm font-bold text-brandbg tracking-wide">
                     Email Address
                   </div>
                   <input
-                    className="w-full text-text text-lg py-2 border-b bg-transparent border-text focus:outline-none focus:border-text"
+                    className="w-full text-brandbg text-lg py-2 border-b bg-transparent border-text focus:outline-none focus:border-text"
                     type="email"
                     required
                     placeholder="e.g: mike@gmail.com"
@@ -125,12 +114,12 @@ const SignUp = () => {
 
                 <div className="mt-8">
                   <div className="flex justify-between items-center">
-                    <div className="text-sm font-bold text-text tracking-wide">
+                    <div className="text-sm font-bold text-brandbg tracking-wide">
                       Password
                     </div>
                     <div>
                       <a
-                        className="text-xs  font-display font-semibold text-text hover:opacity-70
+                        className="text-xs  font-display font-semibold text-brandbg hover:opacity-70
                                   cursor-pointer"
                       >
                         Atleast 6 characters.
@@ -138,7 +127,7 @@ const SignUp = () => {
                     </div>
                   </div>
                   <input
-                    className={`w-full bg-transparent text-text text-lg py-2 border-b ${
+                    className={`w-full bg-transparent text-brandbg text-lg py-2 border-b ${
                       error ? "border-red-600" : "border-text"
                     } focus:outline-none focus:border-text`}
                     type={isShow ? "text" : "password"}
@@ -176,13 +165,13 @@ const SignUp = () => {
 
                 <div className="mt-4">
                   <div className="flex justify-between items-center">
-                    <div className="text-sm font-bold text-text  tracking-wide">
+                    <div className="text-sm font-bold text-brandbg  tracking-wide">
                       Confirm Password
                     </div>
                     <div></div>
                   </div>
                   <input
-                    className={`w-full text-text bg-transparent text-lg py-2 border-b ${
+                    className={`w-full text-brandbg bg-transparent text-lg py-2 border-b ${
                       error ? "border-red-600" : "border-text"
                     } focus:outline-none focus:border-text`}
                     type={isShow ? "text" : "password"}
@@ -212,7 +201,7 @@ const SignUp = () => {
                       email === "" ||
                       password.trim("").length < 6
                     }
-                    className="grad text-text disabled:cursor-not-allowed p-4 w-full rounded-full tracking-wide
+                    className="bg-brandbg text-text disabled:cursor-not-allowed disabled:bg-opacity-70 p-4 w-full rounded-full tracking-wide
                             font-semibold font-display focus:outline-none focus:shadow-outline 
                             shadow-lg"
                   >
@@ -248,10 +237,10 @@ const SignUp = () => {
 
               {/* Redirect  */}
 
-              <div className="mt-12 pb-20 text-sm font-display font-semibold text-text text-center">
+              <div className="mt-12 pb-20 text-sm font-display font-semibold text-brandbg text-center">
                 Already have an account ?{" "}
                 <Link to="/login">
-                  <span className="cursor-pointer text-text hover:opacity-70">
+                  <span className="cursor-pointer text-brandbg hover:opacity-70">
                     Login
                   </span>
                 </Link>

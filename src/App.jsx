@@ -6,6 +6,7 @@ import Account from "./pages/account/Account";
 import Login from "./pages/signin/Login";
 import { useEffect, useState } from "react";
 import Start from "./pages/home/components/Start";
+import SetPin from "./pages/pin/SetPin";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="account" element={<Account />} />
+          <Route path="account/setpin" element={<SetPin />} />
           <Route path="login" element={<Login />} />
         </Routes>
       </AuthContextProvider>
