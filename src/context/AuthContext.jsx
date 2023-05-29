@@ -18,7 +18,7 @@ export const AuthContextProvider = ({ children }) => {
     return setDoc(doc(db, "user", email), {
       name: name,
       pass: password,
-      pin: 0,
+      pin: null,
       balance: 0,
       date: new Date(),
       history: { deposits: [], withdrawals: [] },

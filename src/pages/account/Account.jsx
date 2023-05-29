@@ -5,20 +5,23 @@ import { UserAuth } from "../../context/AuthContext";
 import { db } from "../../firebase";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { Link, Navigate } from "react-router-dom";
+import Container from "../../components/ui/Container";
+import Head from "./components/Head";
+import BalanceCard from "./components/BalanceCard";
 
 const Account = () => {
   const [data, setData] = useState(null);
   const { user } = UserAuth();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     onSnapshot(doc(db, "user", `${user?.email}`), (doc) => {
       setData(doc.data());
     });
-    setLoading(true);
-    if (data?.amount >= 0) {
-      setLoading(false);
-    }
+    // setLoading(true);
+    // if (data?.balance >= 0) {
+    //   setLoading(false);
+    // }
     console.log(user);
     console.log(data);
   }, [user?.email, user, data?.amount]);
@@ -35,17 +38,12 @@ const Account = () => {
           </div>
         ) : (
           <>
-            <NavbarAcc />
-
-            <div className="padding text-text">
-              <h1 className="heading mt-5">Hey {data?.name}! </h1>
-              <p>Welcome back, your account's doing just fine.✌</p>
-
-              <div>
-                <div></div>
-                <div></div>
-              </div>
-            </div>
+            <Container className="w-full">
+              <main className="padding my-5 w-full">
+                <Head name={data?.name} />
+                <BalanceCard amount={data?.balance} />
+              </main>
+            </Container>
           </>
         )}
       </>

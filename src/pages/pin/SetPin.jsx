@@ -5,19 +5,39 @@ import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { Link, Navigate } from "react-router-dom";
 import Logo from "../../components/ui/Logo";
 import Container from "../../components/ui/Container";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const SetPin = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState(null);
+  const [disabled, setDisabled] = useState(true);
   const { user } = UserAuth();
   const [loading, setLoading] = useState(true);
+  const [docRef, setDocref] = useState(null);
   const ref1 = useRef();
   const ref2 = useRef();
   const ref3 = useRef();
   const ref4 = useRef();
+  const button = useRef();
 
-  const [isCodeValid, setIsCodeValid] = useState(false);
-  const [verificationResult, setVerificationResult] = useState("");
-  const docRef = doc(db, "user", user?.email);
+  useEffect(() => {
+    onSnapshot(doc(db, "user", `${user?.email}`), (doc1) => {
+      setData(doc1.data());
+      setDocref(doc(db, "user", user?.email));
+    });
+
+    setLoading(true);
+    if (data?.amount >= 0) {
+      setLoading(false);
+    }
+  }, [data, user?.email]);
+
+  useEffect(() => {
+    if (typeof data?.pin == "number") {
+      navigate("/account");
+    }
+  }, []);
 
   useEffect(() => {
     ref1.current.focus();
@@ -38,15 +58,32 @@ const SetPin = () => {
     return code;
   }
 
-  function verifyCode() {
+  async function verifyCode() {
     console.log(buildCode());
+
     const data = {
       pin: Number(buildCode()),
     };
 
-    updateDoc(docRef, data)
+    await updateDoc(docRef, data)
       .then((docRef) => console.log(docRef))
-      .catch((error) => console.log(error));
+      .catch((error) =>
+        Swal.fire({
+          title: "Oops...",
+          text: "An error occured, Please try again.",
+          icon: "error",
+          confirmButtonText: "Okay",
+        })
+      );
+
+    await Swal.fire({
+      title: "Success",
+      text: "Pin successfuly set. I genuinely pray you remember it, Please continue testing out my app.",
+      icon: "success",
+      confirmButtonText: "Okay",
+    });
+
+    navigate("/account");
   }
 
   const refHasValue = (currentRef) => currentRef.current.value;
@@ -57,7 +94,8 @@ const SetPin = () => {
 
   function handleInput(currentRef, nextRef = currentRef) {
     if (allRefsPopulated()) {
-      console.log("OK");
+      ref4.current.blur();
+      setDisabled(false);
     } else if (currentRef.current.value) {
       focusAndSelect(nextRef);
     }
@@ -123,8 +161,10 @@ const SetPin = () => {
 
         <div className="grid mt-10 place-items-center">
           <button
-            className="max-w-[350px] h-12 bg-brandbg w-full rounded-lg text-text"
+            ref={button}
+            className="max-w-[350px] h-12 bg-brandbg w-full rounded-lg text-text disabled:bg-opacity-70 disabled:cursor-not-allowed"
             onClick={verifyCode}
+            disabled={disabled}
           >
             Submit Pin
           </button>
