@@ -19,9 +19,19 @@ const Deposit = () => {
   const [loader, setLoader] = useState(false);
   const ref = useRef();
 
-  const [amount, setAmount] = useState();
+  const [amount, setAmount] = useState("");
 
   async function send() {
+    if (data?.pin == null) {
+      Swal.fire({
+        title: "Oops...",
+        text: `Please set a pin first.`,
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
+      return;
+    }
+
     const datum = {
       balance: Number(data?.balance) + Number(amount),
     };
@@ -40,23 +50,46 @@ const Deposit = () => {
     };
 
     setLoader(true);
-    await updateDoc(docRef, datum)
-      .then((doc) => updateDoc(docRef, format))
-      .catch((error) =>
-        Swal.fire({
-          title: "Oops...",
-          text: "An error occured, Please try again.",
-          icon: "error",
-          confirmButtonText: "Okay",
-        })
-      );
 
-    await Swal.fire({
-      title: "Success",
-      text: `You just deposited a sum of $${amount}. Spend the way you like.`,
-      icon: "success",
-      confirmButtonText: "Okay",
+    const { value: pin } = await Swal.fire({
+      title: "Enter your PIN",
+      input: "number",
+      inputLabel: "4 digit Pin",
+      inputValue: "",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return;
+        }
+      },
     });
+
+    if (pin == data?.pin) {
+      await updateDoc(docRef, datum)
+        .then((doc) => {
+          updateDoc(docRef, format);
+          Swal.fire({
+            title: "Success",
+            text: `You just deposited a sum of $${amount}. Spend the way you like.`,
+            icon: "success",
+            confirmButtonText: "Okay",
+          });
+        })
+        .catch((error) =>
+          Swal.fire({
+            title: "Oops...",
+            text: "An error occured, Please try again.",
+            icon: "error",
+            confirmButtonText: "Okay",
+          })
+        );
+    } else
+      Swal.fire({
+        title: "Oops...",
+        text: "An error occured, Please try again.",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
 
     setLoader(false);
 
@@ -113,13 +146,17 @@ const Deposit = () => {
                       className="text-center text-2xl font-medium h-full w-full outline-none "
                     />
                   </div>
-                  <p className="text-center mt-5">
+                  <p
+                    className="text-center mt-5"
+                    onClick={() => console.log(amount.length)}
+                  >
                     Please note that you are depositing imaginary funds😂😂.
                   </p>
                 </div>
                 <div className="grid place-items-center">
                   <button
                     onClick={send}
+                    disabled={amount === ""}
                     className="max-w-[350px] h-12  bg-brandbg w-full rounded-lg text-text disabled:bg-opacity-70 disabled:cursor-not-allowed"
                   >
                     Deposit

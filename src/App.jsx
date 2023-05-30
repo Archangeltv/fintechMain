@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Start from "./pages/home/components/Start";
 import SetPin from "./pages/pin/SetPin";
 import Deposit from "./pages/deposit/Deposit";
+import Transfer from "./pages/transfer/Transfer";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -29,6 +30,7 @@ function App() {
           <Route path="account" element={<Account />} />
           <Route path="account/setpin" element={<SetPin />} />
           <Route path="account/deposit" element={<Deposit />} />
+          <Route path="account/transfer" element={<Transfer />} />
           <Route path="login" element={<Login />} />
         </Routes>
       </AuthContextProvider>

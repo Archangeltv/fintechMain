@@ -11,12 +11,14 @@ const Bottom = () => {
   return (
     <div>
       <div className="flex items-center justify-center gap-5 mt-3 flex-wrap">
-        <div className=" w-24 text-center p-3 text-sm  flex flex-col items-center justify-center shadow ">
-          <div className="text-3xl  mb-2">
-            <BsSendFill />
+        <Link to="/account/transfer">
+          <div className=" w-24 text-center p-3 text-sm  flex flex-col items-center justify-center shadow ">
+            <div className="text-3xl  mb-2">
+              <BsSendFill />
+            </div>
+            Transfer
           </div>
-          Transfer
-        </div>
+        </Link>
         <Link to="/account/deposit">
           <div className="w-24 text-center  p-3 text-sm flex flex-col items-center justify-center shadow">
             <div className="text-3xl  mb-2">
