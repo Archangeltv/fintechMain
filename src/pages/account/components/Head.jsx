@@ -1,5 +1,6 @@
 import React from "react";
 import { SiAddthis } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 const Head = ({ name }) => {
   return (
@@ -10,7 +11,9 @@ const Head = ({ name }) => {
         </span>
         <p className="text-lg font-medium">Hi {name} 👋🏿</p>
       </div>
-      <SiAddthis />
+      <Link to="/account/deposit">
+        <SiAddthis />
+      </Link>
       {/* <div className="text-lg font-medium flex items-center justify-center gap-2">
       </div> */}
     </div>

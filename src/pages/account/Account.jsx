@@ -10,6 +10,7 @@ import Head from "./components/Head";
 import BalanceCard from "./components/BalanceCard";
 import Bottom from "./components/Bottom";
 import Navbar from "../../components/navbar/Navbar";
+import Transaction from "./components/Transaction";
 
 const Account = () => {
   const [data, setData] = useState(null);
@@ -49,6 +50,7 @@ const Account = () => {
                   Note: Send and recieve money with your email.
                 </p>
                 <Bottom />
+                <Transaction data={data?.history} />
               </main>
             </Container>
           </>

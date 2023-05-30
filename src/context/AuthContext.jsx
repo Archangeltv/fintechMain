@@ -21,7 +21,7 @@ export const AuthContextProvider = ({ children }) => {
       pin: null,
       balance: 0,
       date: new Date(),
-      history: { deposits: [], withdrawals: [] },
+      history: [],
     });
   };
 

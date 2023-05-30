@@ -5,6 +5,7 @@ import {
   BsFillSuitHeartFill,
 } from "react-icons/bs";
 import { MdOutlinePayments } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Bottom = () => {
   return (
@@ -16,12 +17,14 @@ const Bottom = () => {
           </div>
           Transfer
         </div>
-        <div className="w-24 text-center  p-3 text-sm flex flex-col items-center justify-center shadow">
-          <div className="text-3xl  mb-2">
-            <BsFillArrowRightCircleFill />
+        <Link to="/account/deposit">
+          <div className="w-24 text-center  p-3 text-sm flex flex-col items-center justify-center shadow">
+            <div className="text-3xl  mb-2">
+              <BsFillArrowRightCircleFill />
+            </div>
+            Deposit
           </div>
-          Deposit
-        </div>
+        </Link>
         <div className="w-24 text-center  p-3 text-sm flex flex-col items-center justify-center shadow">
           <div className="text-3xl  mb-2">
             <MdOutlinePayments />
