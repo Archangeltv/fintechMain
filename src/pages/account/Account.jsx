@@ -45,7 +45,7 @@ const Account = () => {
               <main className="padding my-5 w-full">
                 <Head name={data?.name} />
                 <BalanceCard amount={data?.balance} mail={user?.email} />
-                <p className="text-center mt-3 text-lg font-medium">
+                <p className="text-center mt-3 text-sm">
                   Note: Send and recieve money with your email.
                 </p>
                 <Bottom />
