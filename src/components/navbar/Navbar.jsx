@@ -5,7 +5,7 @@ import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
   return (
-    <div className="fixed bottom-5 grid max-w-2xl w-full rounded-full bg-brandbg">
+    <div className="fixed bottom-0 grid max-w-2xl w-full bg-brandbg">
       <div className="grid grid-cols-3 place-items-center text-text text-2xl p-3">
         <div>
           <FaHome />
