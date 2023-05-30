@@ -23,16 +23,14 @@ const SignUp = () => {
     try {
       setNotLoading(false);
       await signUp(name, email, password);
-      Swal.fire({
+      await Swal.fire({
         title: "Success",
         text: "Thanks for Registering with Us, We hope you enjoy using our WebApp.",
         icon: "success",
         confirmButtonText: "Okay",
       });
-      const timeout = setTimeout(() => {
-        navigate("/account/setpin");
-      }, 3000);
-      return () => clearTimeout(timeout);
+
+      navigate("/account/setpin");
     } catch (e) {
       setNotLoading(true);
       e.message === "Firebase: Error (auth/email-already-in-use)." &&
