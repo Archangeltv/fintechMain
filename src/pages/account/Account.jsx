@@ -8,6 +8,8 @@ import { Link, Navigate } from "react-router-dom";
 import Container from "../../components/ui/Container";
 import Head from "./components/Head";
 import BalanceCard from "./components/BalanceCard";
+import Bottom from "./components/Bottom";
+import Navbar from "../../components/navbar/Navbar";
 
 const Account = () => {
   const [data, setData] = useState(null);
@@ -39,9 +41,14 @@ const Account = () => {
         ) : (
           <>
             <Container className="w-full">
+              <Navbar />
               <main className="padding my-5 w-full">
                 <Head name={data?.name} />
-                <BalanceCard amount={data?.balance} />
+                <BalanceCard amount={data?.balance} mail={user?.email} />
+                <p className="text-center mt-3 text-lg font-medium">
+                  Note: Send and recieve money with your email.
+                </p>
+                <Bottom />
               </main>
             </Container>
           </>
