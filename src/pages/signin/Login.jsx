@@ -149,14 +149,14 @@ const Login = () => {
                     <div className="text-sm font-bold text-brandbg tracking-wide">
                       Password
                     </div>
-                    <div>
+                    <Link to="/resetpass">
                       <a
                         className="text-xs font-display font-semibold text-myGreen hover:opacity-70
                                       cursor-pointer"
                       >
                         Forgot Password?
                       </a>
-                    </div>
+                    </Link>
                   </div>
                   <input
                     className={`w-full bg-transparent text-lg py-2 border-b ${

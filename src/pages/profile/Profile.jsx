@@ -73,12 +73,12 @@ const Profile = () => {
                 </section>
                 <div>
                   <ProfileData
-                    link="/account"
+                    link="/account/editprofile"
                     text="BASIC DATA"
                     icon={<CgProfile />}
                   />
                   <ProfileData
-                    link="/"
+                    link="https://twitter.com/AimiuwuVictor"
                     text="CONTACT DEV"
                     icon={<MdMessage />}
                   />
