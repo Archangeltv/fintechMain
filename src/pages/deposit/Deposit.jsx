@@ -70,7 +70,13 @@ const Deposit = () => {
           updateDoc(docRef, format);
           Swal.fire({
             title: "Success",
-            text: `You just deposited a sum of $${amount}. Spend the way you like.`,
+            text: `You just deposited a sum of $${Number(amount).toLocaleString(
+              undefined,
+              {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }
+            )}, Spend the way you like.`,
             icon: "success",
             confirmButtonText: "Okay",
           });
@@ -93,7 +99,7 @@ const Deposit = () => {
 
     setLoader(false);
 
-    ref.current.value = "";
+    setAmount("");
   }
 
   useEffect(() => {
@@ -136,7 +142,7 @@ const Deposit = () => {
                       type="number"
                       placeholder="amount"
                       onChange={(e) => {
-                        setAmount(e.target.value.toLocaleString());
+                        setAmount(e.target.value);
                       }}
                       className="text-center text-2xl font-medium h-full w-full outline-none "
                     />
