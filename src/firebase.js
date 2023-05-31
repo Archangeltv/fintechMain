@@ -8,14 +8,22 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const apiKey1 = import.meta.env.VITE_APIKEY;
+const authDomain1 = import.meta.env.VITE_AUTHDOMAIN;
+const projectId1 = import.meta.env.VITE_PROJECTID;
+const storageBucket1 = import.meta.env.VITE_STORAGE;
+const messagingSenderId1 = import.meta.env.VITE_SENDER;
+const appId = import.meta.env.VITE_APPID;
+const measurementId = import.meta.env.VITE_MEASURE;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCllFIj3UTtjVa9cfJnhYkuIc_BcDrZb04",
-  authDomain: "fintech-e4a13.firebaseapp.com",
-  projectId: "fintech-e4a13",
-  storageBucket: "fintech-e4a13.appspot.com",
-  messagingSenderId: "1072515265191",
-  appId: "1:1072515265191:web:52cbeecc27b853f243a182",
-  measurementId: "G-6SRF39YC6B",
+  apiKey: apiKey1,
+  authDomain: authDomain1,
+  projectId: projectId1,
+  storageBucket: storageBucket1,
+  messagingSenderId: messagingSenderId1,
+  appId: appId,
+  measurementId: measurementId,
 };
 
 // Initialize Firebase
