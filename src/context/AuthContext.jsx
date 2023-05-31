@@ -22,6 +22,7 @@ export const AuthContextProvider = ({ children }) => {
       balance: 0,
       date: new Date(),
       history: [],
+      notification: [],
     });
   };
 

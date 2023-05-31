@@ -11,23 +11,21 @@ import BalanceCard from "./components/BalanceCard";
 import Bottom from "./components/Bottom";
 import Navbar from "../../components/navbar/Navbar";
 import Transaction from "./components/Transaction";
+import Notification from "./components/Notification";
 
 const Account = () => {
   const [data, setData] = useState(null);
   const { user } = UserAuth();
   const [loading, setLoading] = useState(false);
+  const [number, setNumber] = useState(false);
 
   useEffect(() => {
     onSnapshot(doc(db, "user", `${user?.email}`), (doc) => {
       setData(doc.data());
     });
-    // setLoading(true);
-    // if (data?.balance >= 0) {
-    //   setLoading(false);
-    // }
-    console.log(user);
-    console.log(data);
-  }, [user?.email, user, data?.amount]);
+    const filteredData = data?.notification?.filter((item) => !item.read);
+    setNumber(filteredData?.length);
+  }, [user?.email, data, number, user, data?.amount]);
 
   if (user) {
     return (
@@ -43,8 +41,8 @@ const Account = () => {
           <>
             <Container className="w-full">
               <Navbar />
-              <main className="padding my-5 w-full">
-                <Head name={data?.name} />
+              <main className="padding my-5 mb-16 w-full">
+                <Head amount={number} name={data?.name} />
                 <BalanceCard amount={data?.balance} mail={user?.email} />
                 <p className="text-center mt-3 text-sm">
                   Note: Send and recieve money with your email.

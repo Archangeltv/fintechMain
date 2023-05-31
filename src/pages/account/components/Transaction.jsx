@@ -21,9 +21,9 @@ const Transaction = ({ data }) => {
             return (
               <div
                 key={item.id}
-                className="flex gap-16 border shadow p-5 rounded-lg justify-between items-center"
+                className="flex gap-10 border break-words text-ellipsis shadow p-5 rounded-lg justify-between items-center"
               >
-                <div>
+                <div className=" basis-3/5 grow-0 shrink-0 ">
                   <p className="mb-3 capitalize">From: {item.source}</p>
                   <p>
                     {item.time.toDate().toLocaleString("en-US", {
@@ -37,7 +37,7 @@ const Transaction = ({ data }) => {
                   </p>
                 </div>
                 <p
-                  className={`${
+                  className={`  ${
                     item.type == "deposit" ? "text-green-600" : "text-red-600"
                   }`}
                 >

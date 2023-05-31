@@ -2,7 +2,7 @@ import React from "react";
 import { CgBell } from "react-icons/cg";
 import { Link } from "react-router-dom";
 
-const Head = ({ name }) => {
+const Head = ({ name, amount }) => {
   return (
     <div className="flex justify-between items-center w-full">
       <Link to="/account/profile">
@@ -13,9 +13,16 @@ const Head = ({ name }) => {
           <p className="text-lg font-medium">Hi {name} 👋🏿</p>
         </div>
       </Link>
-      <div className="cursor-pointer text-2xl">
-        <CgBell />
-      </div>
+      <Link to="/account/notification">
+        <div className=" relative cursor-pointer text-2xl">
+          {amount > 0 && (
+            <span className="absolute text-sm right-[-5px]  text-text bg-brandbg w-5 h-5 place-items-center grid top-[-10px] rounded-full">
+              {amount}
+            </span>
+          )}
+          <CgBell />
+        </div>
+      </Link>
     </div>
   );
 };

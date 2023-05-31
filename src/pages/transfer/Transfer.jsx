@@ -72,6 +72,34 @@ const Transfer = () => {
       ],
     };
 
+    const notifSender = {
+      notification: [
+        ...data?.notification,
+        {
+          id: data?.notification?.length + 1,
+          read: false,
+          name: docss?.name,
+          type: "sent",
+          time: new Date(),
+          amount: amount,
+        },
+      ],
+    };
+
+    const notifReciever = {
+      notification: [
+        ...docss?.notification,
+        {
+          id: data?.notification?.length + 1,
+          read: false,
+          name: data?.name,
+          type: "recieved",
+          time: new Date(),
+          amount: amount,
+        },
+      ],
+    };
+
     setLoader(true);
 
     const { value: pin } = await Swal.fire({
@@ -97,6 +125,8 @@ const Transfer = () => {
           .then((docc) => {
             updateDoc(docRef, format);
             updateDoc(doc(db, "user", mail), add);
+            updateDoc(doc(db, "user", mail), notifReciever);
+            updateDoc(docRef, notifSender);
             updateDoc(doc(db, "user", mail), hist);
             Swal.fire({
               title: "Success",

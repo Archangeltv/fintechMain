@@ -64,10 +64,25 @@ const Deposit = () => {
       },
     });
 
+    const notif = {
+      notification: [
+        ...data?.notification,
+        {
+          id: data?.notification?.length + 1,
+          read: false,
+          name: "Imagination",
+          type: "recieved",
+          time: new Date(),
+          amount: amount,
+        },
+      ],
+    };
+
     if (pin == data?.pin) {
       await updateDoc(docRef, datum)
         .then((doc) => {
           updateDoc(docRef, format);
+          updateDoc(docRef, notif);
           Swal.fire({
             title: "Success",
             text: `You just deposited a sum of $${Number(amount).toLocaleString(
@@ -152,12 +167,18 @@ const Deposit = () => {
                     onClick={() => console.log(amount.length)}
                   >
                     Please note that you are depositing imaginary funds😂😂.
+                    Deposit in range of $10 to $20,000 so funds will not finish,
+                    thank you.
                   </p>
                 </div>
                 <div className="grid place-items-center">
                   <button
                     onClick={send}
-                    disabled={amount === ""}
+                    disabled={
+                      amount === "" ||
+                      Number(amount) < 10 ||
+                      Number(amount) > 20000
+                    }
                     className="max-w-[350px] h-12  bg-brandbg w-full rounded-lg text-text disabled:bg-opacity-70 disabled:cursor-not-allowed"
                   >
                     Deposit
