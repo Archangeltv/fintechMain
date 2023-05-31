@@ -107,7 +107,7 @@ const Login = () => {
                   </svg>
                 </div>
                 <div className="text-2xl text-myGreen tracking-wide ml-2 font-semibold">
-                  Mac Investors
+                  Fintech.
                 </div>
               </div>
             </div>
