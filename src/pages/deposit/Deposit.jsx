@@ -86,7 +86,7 @@ const Deposit = () => {
     } else
       Swal.fire({
         title: "Oops...",
-        text: "An error occured, Please try again.",
+        text: "Pin incorrect, Try again.",
         icon: "error",
         confirmButtonText: "Okay",
       });
@@ -101,12 +101,6 @@ const Deposit = () => {
       setData(doc1.data());
       setDocref(doc(db, "user", user?.email));
     });
-    // setLoading(true);
-    // if (data?.balance >= 0) {
-    //   setLoading(false);
-    // }
-    console.log(user);
-    console.log(data);
   }, [user?.email, user, data?.amount]);
 
   if (user) {
@@ -138,10 +132,11 @@ const Deposit = () => {
                     </p>
                     <input
                       ref={ref}
+                      value={amount}
                       type="number"
                       placeholder="amount"
                       onChange={(e) => {
-                        setAmount(e.target.value);
+                        setAmount(e.target.value.toLocaleString());
                       }}
                       className="text-center text-2xl font-medium h-full w-full outline-none "
                     />

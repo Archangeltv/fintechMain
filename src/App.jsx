@@ -9,6 +9,7 @@ import Start from "./pages/home/components/Start";
 import SetPin from "./pages/pin/SetPin";
 import Deposit from "./pages/deposit/Deposit";
 import Transfer from "./pages/transfer/Transfer";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -31,6 +32,7 @@ function App() {
           <Route path="account/setpin" element={<SetPin />} />
           <Route path="account/deposit" element={<Deposit />} />
           <Route path="account/transfer" element={<Transfer />} />
+          <Route path="account/profile" element={<Profile />} />
           <Route path="login" element={<Login />} />
         </Routes>
       </AuthContextProvider>
