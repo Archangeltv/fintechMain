@@ -19,7 +19,6 @@ export const AuthContextProvider = ({ children }) => {
     await createUserWithEmailAndPassword(auth, email, password);
     return setDoc(doc(db, "user", email), {
       name: name,
-      pass: password,
       pin: null,
       balance: 0,
       date: new Date(),

@@ -124,6 +124,11 @@ const SetPin = () => {
             onInput={() => {
               handleInput(ref1, ref2);
             }}
+            onChange={(e) => {
+              if (e.target.value.length > 1) {
+                e.target.value = e.target.value.slice(0, 1);
+              }
+            }}
           />
           <input
             className="w-1/4 h-20 border border-grey-color text-center"
@@ -133,6 +138,11 @@ const SetPin = () => {
             ref={ref2}
             onInput={() => {
               handleInput(ref2, ref3);
+            }}
+            onChange={(e) => {
+              if (e.target.value.length > 1) {
+                e.target.value = e.target.value.slice(0, 1);
+              }
             }}
           />
           <input
@@ -144,6 +154,11 @@ const SetPin = () => {
             onInput={() => {
               handleInput(ref3, ref4);
             }}
+            onChange={(e) => {
+              if (e.target.value.length > 1) {
+                e.target.value = e.target.value.slice(0, 1);
+              }
+            }}
           />
           <input
             className="w-1/4 h-20 border border-grey-color text-center"
@@ -153,6 +168,11 @@ const SetPin = () => {
             ref={ref4}
             onInput={() => {
               handleInput(ref4);
+            }}
+            onChange={(e) => {
+              if (e.target.value.length > 1) {
+                e.target.value = e.target.value.slice(0, 1);
+              }
             }}
           />
         </div>
