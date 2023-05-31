@@ -97,6 +97,8 @@ const SetPin = () => {
     } else if (currentRef.current.value) {
       focusAndSelect(nextRef);
     }
+
+    event.preventDefault();
   }
 
   return (
