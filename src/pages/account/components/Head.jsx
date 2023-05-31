@@ -20,6 +20,11 @@ const Head = ({ name, amount }) => {
               {amount}
             </span>
           )}
+          {amount > 9 && (
+            <span className="absolute text-sm right-[-5px]  text-text bg-brandbg w-5 h-5 place-items-center grid top-[-10px] rounded-full">
+              9+
+            </span>
+          )}
           <CgBell />
         </div>
       </Link>

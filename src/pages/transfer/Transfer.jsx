@@ -90,7 +90,7 @@ const Transfer = () => {
       notification: [
         ...docss?.notification,
         {
-          id: data?.notification?.length + 1,
+          id: docss?.notification?.length + 1,
           read: false,
           name: data?.name,
           type: "recieved",
