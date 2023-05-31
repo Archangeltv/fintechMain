@@ -121,7 +121,8 @@ const SetPin = () => {
             maxLength="1"
             type="number"
             ref={ref1}
-            onInput={() => {
+            onInput={(e) => {
+              e.target.value = e.target.value.slice(0, 1);
               handleInput(ref1, ref2);
             }}
             // onChange={(e) => {
@@ -136,8 +137,9 @@ const SetPin = () => {
             maxLength="1"
             type="number"
             ref={ref2}
-            onInput={() => {
-              handleInput(ref2, ref3);
+            onInput={(e) => {
+              e.target.value = e.target.value.slice(0, 1);
+              handleInput(ref1, ref2);
             }}
             // onChange={(e) => {
             //   if (e.target.value.length > 1) {
@@ -151,8 +153,9 @@ const SetPin = () => {
             maxLength="1"
             type="number"
             ref={ref3}
-            onInput={() => {
-              handleInput(ref3, ref4);
+            onInput={(e) => {
+              e.target.value = e.target.value.slice(0, 1);
+              handleInput(ref1, ref2);
             }}
             // onChange={(e) => {
             //   if (e.target.value.length > 1) {
@@ -166,8 +169,9 @@ const SetPin = () => {
             maxLength="1"
             type="number"
             ref={ref4}
-            onInput={() => {
-              handleInput(ref4);
+            onInput={(e) => {
+              e.target.value = e.target.value.slice(0, 1);
+              handleInput(ref1, ref2);
             }}
             // onChange={(e) => {
             //   if (e.target.value.length > 1) {
