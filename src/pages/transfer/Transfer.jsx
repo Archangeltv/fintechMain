@@ -178,7 +178,6 @@ const Transfer = () => {
     // if (data?.balance >= 0) {
     //   setLoading(false);
     // }
-    console.log(data1);
   }, [user?.email, user, data?.amount]);
 
   async function Check() {
@@ -252,10 +251,7 @@ const Transfer = () => {
                       className="text-center text-2xl font-medium h-full w-full outline-none "
                     />
                   </div>
-                  <p
-                    className="text-center mt-5"
-                    onClick={() => console.log(amount.length)}
-                  >
+                  <p className="text-center mt-5">
                     Please note that you are sending imaginary funds😂😂.
                   </p>
                 </div>

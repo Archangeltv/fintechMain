@@ -53,7 +53,6 @@ const SignUp = () => {
   useEffect(() => {
     if (user) {
       navigate("/account");
-      console.log(user);
     }
   }, [user, navigate]);
 

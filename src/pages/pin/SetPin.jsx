@@ -59,8 +59,6 @@ const SetPin = () => {
   }
 
   async function verifyCode() {
-    console.log(buildCode());
-
     const data = {
       pin: Number(buildCode()),
     };
