@@ -139,7 +139,7 @@ const SetPin = () => {
             ref={ref2}
             onInput={(e) => {
               e.target.value = e.target.value.slice(0, 1);
-              handleInput(ref1, ref2);
+              handleInput(ref2, ref3);
             }}
             // onChange={(e) => {
             //   if (e.target.value.length > 1) {
@@ -155,7 +155,7 @@ const SetPin = () => {
             ref={ref3}
             onInput={(e) => {
               e.target.value = e.target.value.slice(0, 1);
-              handleInput(ref1, ref2);
+              handleInput(ref3, ref4);
             }}
             // onChange={(e) => {
             //   if (e.target.value.length > 1) {
@@ -171,7 +171,7 @@ const SetPin = () => {
             ref={ref4}
             onInput={(e) => {
               e.target.value = e.target.value.slice(0, 1);
-              handleInput(ref1, ref2);
+              handleInput(ref4);
             }}
             // onChange={(e) => {
             //   if (e.target.value.length > 1) {
