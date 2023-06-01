@@ -262,7 +262,12 @@ const Transfer = () => {
                 >
                   <button
                     onClick={Check}
-                    disabled={mail === "" || amount == ""}
+                    disabled={
+                      mail === "" ||
+                      amount == "" ||
+                      Number(amount) < 1 ||
+                      mail == user?.email
+                    }
                     className="max-w-[350px] h-12  bg-brandbg w-full rounded-lg text-text disabled:bg-opacity-70 disabled:cursor-not-allowed"
                   >
                     Confirm
